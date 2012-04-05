@@ -9,7 +9,7 @@
         step:10,
         initialDeg:Math.PI/2,
         slides_container:'.slides',
-        slides_selector:'.slides .slide',
+        slides_selector:'.slide',
         btn_selector:'.arrows .arrow',
         next_btn_class:'next',
         prev_btn_class:'prev',
@@ -19,7 +19,7 @@
         rangeO:0.8,
         rangeD:0.6,
         timed:true,
-        timer_interval:5000,
+        timer_interval:1000,
     };  
     // Constructor
      function itsShowTime(div,options){
@@ -31,12 +31,22 @@
          this.rotating=false;
          this.pending=0;
          this.active=0;
+         this.initStyles();
          this.initSlides();
          this.initArrows();
          this.initBullets();
          this.rotate(0);
-         this.resetTimer();
+         if(this.options.timed){
+             this.resetTimer();
+             this.initHOverBehavior();
+         }
      }
+     // Attach necessary styles to make the carrousel work
+     itsShowTime.prototype.initStyles=function(){
+         var styles='<style> .%stage_class{position:relative;} .%stage_class %slides_class %slide_class{position:relative;display:inline-block;} .%stage_class %slides_class %slide_class.animationReady{display:block; position:absolute; top:0px; left:0px;} </style>';
+         styles=styles.replace(/%stage_class/g,this.div.attr('class')).replace(/%slides_class/g,this.options.slides_container).replace(/%slide_class/g,this.options.slides_selector);
+         this.div.append(styles);
+     };
      // Initialize slides container with parent dimensions.
      // Initialize slides with proper css classes and store Slides intances in an array to access original dimensions
      itsShowTime.prototype.initSlides=function(){
@@ -66,24 +76,34 @@
                bh.append(t);
            }
            this.div.find('.bullet').each(function(i){
+               if(i==0){
+                   $(this).addClass('active');
+               }
                $(this).click(function(e){
-                   cp.activate(i);
-                   e.preventDefault();
+                   if(cp.active!=i){
+                       cp.activate(i);
+                       e.preventDefault();
+                   }
                });
            });
        };
      };
      itsShowTime.prototype.resetTimer=function(){
+       var cp=this;   
+       this.div.stopTime();
+       this.div.everyTime(this.options.timer_interval,function(e){
+           cp.go(1);
+       });
+     };
+     itsShowTime.prototype.initHOverBehavior=function(){
        var cp=this;
-        if(this.options.timed){
-           this.div.stopTime();
-           this.div.everyTime(this.options.timer_interval,function(e){
-               cp.go(1);
-           });
-        }
+       this.div.find(this.options.slides_container).hover(function(e){
+           cp.div.stopTime();
+       },function(e){
+           cp.resetTimer();
+       });
      };
      itsShowTime.prototype.activate=function(i){
-         
              var sign=1;
              var steps=1;
              if(i<this.active){
@@ -104,6 +124,7 @@
              this.go(sign*steps);
      };
      itsShowTime.prototype.go=function(m){
+         var cp=this;
          // If its rotating right now, just add pending 
         if(!this.rotating){
             this.inc=360/this.slides.length*Math.abs(m);
@@ -114,6 +135,13 @@
         this.active-=m;
         this.active=this.active<0?this.slides.length+this.active:this.active;
         this.active=this.active>=this.slides.length?this.active-this.slides.length:this.active;
+        this.div.find('.bullet').each(function(i){
+           if(i==cp.active){
+               $(this).addClass('active');   
+           }else{
+               $(this).removeClass('active');
+           }
+        });
      };
      // Rotate action, if step equals 0 then it just initializes the slides with proper coordinates.
      itsShowTime.prototype.rotate=function(step){
