@@ -19,7 +19,7 @@
         rangeO:0.8,
         rangeD:0.6,
         timed:true,
-        timer_interval:1000,
+        timer_interval:5000,
     };  
     // Constructor
      function itsShowTime(div,options){
@@ -62,7 +62,7 @@
      itsShowTime.prototype.initArrows=function(){
        var cp=this;
        this.div.find(this.options.btn_selector).click(function(e){
-           cp.go($(this).hasClass(cp.options.next_btn_class)?1:-1);
+           cp.go($(this).hasClass(cp.options.next_btn_class)?-1:1);
            cp.resetTimer();
            e.preventDefault();
        });  
@@ -92,7 +92,7 @@
        var cp=this;   
        this.div.stopTime();
        this.div.everyTime(this.options.timer_interval,function(e){
-           cp.go(1);
+           cp.go(-1);
        });
      };
      itsShowTime.prototype.initHOverBehavior=function(){
