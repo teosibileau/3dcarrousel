@@ -2,6 +2,10 @@
 
 This is a jQuery plugin that allows you to create 3D Carrousels limited just to your needs. Given certain boundaries, it takes care of layout, next-prev actions, bullets and timed transitions for you.
 
+## Demo
+
+http://drkloc.github.com/3dcarrousel/
+
 ## Dependencies 
 
 If you crave for automatic timed transitions you will need to load the awesome jQuery Timers plugin (http://archive.plugins.jquery.com/project/timers). There's a copy included to ease setup.
