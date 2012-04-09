@@ -20,7 +20,10 @@ a#forkme_banner {
   text-indent: -9000px;
   z-index: 3;
 }
-
+h1{
+    margin-top:40px;
+    text-align:center;
+}
 a#forkme_banner:hover {
   background-position: 0 -138px;
 }

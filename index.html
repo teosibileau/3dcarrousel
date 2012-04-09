@@ -10,6 +10,7 @@
   </head>
   <body>
     <a id="forkme_banner" href="https://github.com/drkloc/3dcarrousel">Fork Me on GitHub</a>
+    <h1>Five items, timed</h1>
     <div id="stage" class="stage">
       <div class="slides">
         <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">0</div></div>
@@ -25,11 +26,45 @@
       <div class="bullets">
       </div>
     </div>
+    <h1>Seven items, not timed</h1>
+    <div id="stagetwo" class="stage">
+      <div class="slides">
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">0</div></div>
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">1</div></div>
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">2</div></div>
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">3</div></div>
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">4</div></div>
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">3</div></div>
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">4</div></div>
+      </div>
+      <div class="arrows">
+        <a class="prev arrow" href="#">prev</a>
+        <a class="next arrow" href="#">next</a>
+      </div>
+      <div class="bullets">
+      </div>
+    </div>
+    <h1>Four items, no bullets</h1>
+    <div id="stagethree" class="stage">
+      <div class="slides">
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">0</div></div>
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">1</div></div>
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">2</div></div>
+        <div class="slide"><img class="scalable" src="images/delpo.png" width="334" height="286"/><div class="number">3</div></div>
+      </div>
+      <div class="arrows">
+        <a class="prev arrow" href="#">prev</a>
+        <a class="next arrow" href="#">next</a>
+      </div>
+    </div>
     <script type="text/javascript">
       $(function(){
               $('#stage').itsShowTime();
+              $('#stagetwo').itsShowTime({timed:false});
+              $('#stagethree').itsShowTime();
       });
     </script>
+    
     <script type="text/javascript">
 
       var _gaq = _gaq || [];
