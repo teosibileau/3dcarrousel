@@ -4,7 +4,7 @@ This is a jQuery plugin that allows you to create 3D Carrousels limited just to 
 
 ## Dependencies 
 
-If you crave for automatic timed transitions you will need to load the awesome jQuery Timers plugin (http://archive.plugins.jquery.com/project/timers). There's a copy included
+If you crave for automatic timed transitions you will need to load the awesome jQuery Timers plugin (http://archive.plugins.jquery.com/project/timers). There's a copy included to ease setup.
 
 ## How to use
 
@@ -27,7 +27,7 @@ Add your markup
     </div>
   </div>
   <style>
-    /* custom styles to check everything it's ok*/
+    /* Give your stage proper dimensions */
     .stage{
         margin:0 auto;
         width:700px;
@@ -42,7 +42,9 @@ Add your markup
   </style>
 ```
 
-Load js libraries and pass the constructor certain options (or use defaults) for jQuery selectors and stuff 
+Notice that we give explicit dimensions to the stage div. This is extremely important because the plugin builds layout base on them. It's the only layout you have to provide to assure proper functionality.
+
+Load js libraries and pass the constructor certain options (or use defaults) for jQuery selectors and stuff.
 
 ```html
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -66,14 +68,3 @@ Load js libraries and pass the constructor certain options (or use defaults) for
 ```
 
 You could use this default markup or your own classes, just remember to pass any customization through the options object during construction. 
-
-## Required CSS
-
-```css
-  /* Give your stage proper dimensions so the plugin can build upon them */
-  .stage{
-      margin:0 auto;
-      width:700px;
-      height:450px;
-  }
-```
